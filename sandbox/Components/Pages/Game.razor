@@ -1,0 +1,40 @@
+@page "/game"
+@using TestComponent.Services
+@using sandbox.core
+@inject GameService gameSevice
+
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (game == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Players</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in game.Players)
+            {
+                <tr>
+                    <td>@player.Name)</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    sandbox.core.Game game;
+    protected override async Task OnInitAsync()
+    {
+        game =await gameSevice.SetUpGane();
+    }
+}
